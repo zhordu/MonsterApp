@@ -161,73 +161,6 @@
             color: white;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .project-card {
-            background-color: rgba(59, 130, 246, 0.05);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-img {
-            height: 180px;
-            background-color: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.25rem;
-            color: var(--secondary-color);
-            margin-bottom: 0.75rem;
-        }
-
-        .project-desc {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
-        }
-
-        .project-link:hover {
-            color: var(--secondary-color);
-        }
-
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -337,6 +270,81 @@
             transform: translateY(-3px);
         }
 
+        /* Calculator Styles */
+        .calculator-container {
+            max-width: 320px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .calculator-display {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: right;
+            padding: 1.5rem;
+            font-size: 2rem;
+            font-weight: 500;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            word-break: break-all;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background-color: #e5e7eb;
+        }
+
+        .calculator-button {
+            border: none;
+            background-color: white;
+            font-size: 1.25rem;
+            padding: 1.25rem 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calculator-button:hover {
+            background-color: #f3f4f6;
+        }
+
+        .calculator-button:active {
+            background-color: #e5e7eb;
+        }
+
+        .operator {
+            background-color: #f8fafc;
+        }
+
+        .equal {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .equal:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .clear {
+            background-color: #f97316;
+            color: white;
+        }
+
+        .clear:hover {
+            background-color: #ea580c;
+        }
+
+        .calculator-description {
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
         @media (max-width: 768px) {
             .profile-card {
                 padding: 1.5rem;
@@ -346,10 +354,6 @@
                 width: 120px;
                 height: 120px;
                 margin-top: -80px;
-            }
-            
-            .project-grid {
-                grid-template-columns: 1fr;
             }
             
             .nav-container {
@@ -379,7 +383,7 @@
     <main class="profile-container">
         <section class="profile-card">
             <div class="profile-image">
-                <img src="https://scontent.fcgy2-2.fna.fbcdn.net/v/t39.30808-6/476951651_1198893948551845_6098344076016541326_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeFxsf4hP_uoEN-EFgi5m4XauXvTcQolzUS5e9NxCiXNRJPQtDh2L5-E6MAd1Fr25sTZomCkJPUW0vrJn-IVFlMT&_nc_ohc=jcAMUbu_NvwQ7kNvwGgoI5d&_nc_oc=AdnJwyhjCbxdkuUwMck6NiK3fAXFg53B3pO_2-QPB-7prJ5QHjL9LQ9I_CUqLUZ1Ld4&_nc_zt=23&_nc_ht=scontent.fcgy2-2.fna&_nc_gid=jetWUoU-tuBoMKIFuFAW5Q&oh=00_AfHHbEpScE_bWvS7l6MxaFZ3odUJyeaKlDlTvpTeoAQtdA&oe=6816C7AC" alt="Profile Photo">
+                <img src="/api/placeholder/160/160" alt="Profile Photo">
             </div>
             <div class="profile-info">
                 <h1 class="profile-name">Rekkusu</h1>
@@ -432,50 +436,144 @@
         </section>
 
         <section id="projects" class="content-section">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/180" alt="E-commerce Platform">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Laravel E-commerce Platform</h3>
-                        <p class="project-desc">A fully-featured e-commerce solution built with Laravel, featuring product management, cart functionality, payment integration, and an admin dashboard.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/180" alt="CRM System">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Customer Management System</h3>
-                        <p class="project-desc">A comprehensive CRM system developed with Laravel and Vue.js, allowing businesses to manage customer relationships, track interactions, and analyze sales data.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="/api/placeholder/400/180" alt="Content Management System">
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Custom CMS Solution</h3>
-                        <p class="project-desc">A flexible content management system built with Laravel, featuring dynamic content types, user management, media library, and customizable themes.</p>
-                        <div class="project-links">
-                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        </div>
-                    </div>
+            <h2 class="section-title">Interactive Calculator</h2>
+            
+            <div class="calculator-description">
+                <p>This fully functional calculator demonstrates my front-end development skills using JavaScript, HTML, and CSS. Try it out by clicking the buttons below!</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div id="calculator-display" class="calculator-display">0</div>
+                <div class="calculator-buttons">
+                    <button class="calculator-button clear" onclick="clearDisplay()">C</button>
+                    <button class="calculator-button operator" onclick="handleOperator('/')">÷</button>
+                    <button class="calculator-button operator" onclick="handleOperator('*')">×</button>
+                    <button class="calculator-button operator" onclick="deleteLastChar()">⌫</button>
+                    
+                    <button class="calculator-button" onclick="appendNumber('7')">7</button>
+                    <button class="calculator-button" onclick="appendNumber('8')">8</button>
+                    <button class="calculator-button" onclick="appendNumber('9')">9</button>
+                    <button class="calculator-button operator" onclick="handleOperator('-')">−</button>
+                    
+                    <button class="calculator-button" onclick="appendNumber('4')">4</button>
+                    <button class="calculator-button" onclick="appendNumber('5')">5</button>
+                    <button class="calculator-button" onclick="appendNumber('6')">6</button>
+                    <button class="calculator-button operator" onclick="handleOperator('+')">+</button>
+                    
+                    <button class="calculator-button" onclick="appendNumber('1')">1</button>
+                    <button class="calculator-button" onclick="appendNumber('2')">2</button>
+                    <button class="calculator-button" onclick="appendNumber('3')">3</button>
+                    <button class="calculator-button equal" onclick="calculate()">=</button>
+                    
+                    <button class="calculator-button" onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+                    <button class="calculator-button" onclick="appendNumber('.')">.</button>
                 </div>
             </div>
+            
+            <script>
+                let displayValue = '0';
+                let pendingOperation = null;
+                let storedValue = null;
+                let resetDisplayOnNextInput = false;
+                
+                const display = document.getElementById('calculator-display');
+                
+                function updateDisplay() {
+                    display.textContent = displayValue;
+                }
+                
+                function appendNumber(num) {
+                    if (displayValue === '0' || resetDisplayOnNextInput) {
+                        displayValue = num;
+                        resetDisplayOnNextInput = false;
+                    } else if (displayValue.length < 12) {
+                        // Prevent adding multiple decimal points
+                        if (num === '.' && displayValue.includes('.')) {
+                            return;
+                        }
+                        displayValue += num;
+                    }
+                    updateDisplay();
+                }
+                
+                function clearDisplay() {
+                    displayValue = '0';
+                    pendingOperation = null;
+                    storedValue = null;
+                    resetDisplayOnNextInput = false;
+                    updateDisplay();
+                }
+                
+                function deleteLastChar() {
+                    if (displayValue.length > 1) {
+                        displayValue = displayValue.slice(0, -1);
+                    } else {
+                        displayValue = '0';
+                    }
+                    updateDisplay();
+                }
+                
+                function handleOperator(operator) {
+                    if (pendingOperation !== null) {
+                        calculate();
+                    }
+                    
+                    storedValue = parseFloat(displayValue);
+                    pendingOperation = operator;
+                    resetDisplayOnNextInput = true;
+                }
+                
+                function calculate() {
+                    if (pendingOperation === null || storedValue === null) {
+                        return;
+                    }
+                    
+                    const currentValue = parseFloat(displayValue);
+                    let result;
+                    
+                    switch (pendingOperation) {
+                        case '+':
+                            result = storedValue + currentValue;
+                            break;
+                        case '-':
+                            result = storedValue - currentValue;
+                            break;
+                        case '*':
+                            result = storedValue * currentValue;
+                            break;
+                        case '/':
+                            if (currentValue === 0) {
+                                result = 'Error';
+                            } else {
+                                result = storedValue / currentValue;
+                            }
+                            break;
+                    }
+                    
+                    // Format the result
+                    if (result === 'Error') {
+                        displayValue = result;
+                    } else {
+                        // Limit decimal places to prevent overflow
+                        result = parseFloat(result.toFixed(8));
+                        // Convert to string and remove trailing zeros
+                        displayValue = String(result).replace(/\.0+$|(\.\d*[1-9])0+$/, '$1');
+                        
+                        // If result is too large, display in scientific notation
+                        if (displayValue.length > 12) {
+                            displayValue = result.toExponential(4);
+                        }
+                    }
+                    
+                    updateDisplay();
+                    storedValue = result === 'Error' ? 0 : result;
+                    pendingOperation = null;
+                    resetDisplayOnNextInput = true;
+                }
+                
+                // Initialize display
+                updateDisplay();
+            </script>
         </section>
 
         <section id="contact" class="content-section">
