@@ -3,62 +3,543 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Project</title>
+    <title>Rekkusu | Developer Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --text-color: #334155;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --accent-color: #f97316;
+            --border-radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .profile-container {
+            position: relative;
+            max-width: 1100px;
+            margin: -80px auto 0;
+            padding: 0 2rem;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 2rem;
-            color: #333;
+            margin-bottom: 2rem;
         }
-        h1 {
-            color: #2d3748;
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: -100px;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
-        .container {
-            background-color: #f7fafc;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        a {
-            color: #4299e1;
+
+        .profile-info {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .profile-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .profile-bio {
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
-        a:hover {
+
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .content-section {
+            background-color: var(--card-bg);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: rgba(59, 130, 246, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            height: 180px;
+            background-color: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: rgba(59, 130, 246, 0.05);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
             text-decoration: underline;
         }
-        .links {
+
+        footer {
+            background-color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 2rem;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
             margin-top: 2rem;
         }
-        .links a {
+
+        .navbar {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
             display: inline-block;
-            margin-right: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #ebf8ff;
-            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 1.5rem;
+            }
+            
+            .profile-image {
+                width: 120px;
+                height: 120px;
+                margin-top: -80px;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Laravel Project</h1>
-        <p>This is a Laravel web application project. The actual application is not directly accessible through GitHub Pages as it requires a PHP server environment to run.</p>
-        
-        <h2>Getting Started</h2>
-        <p>To run this project locally, you'll need:</p>
-        <ul>
-            <li>PHP 8.1 or higher</li>
-            <li>Composer (PHP package manager)</li>
-            <li>Node.js and NPM</li>
-            <li>A web server (Apache/Nginx) or PHP's built-in development server</li>
-        </ul>
-
-        <div class="links">
-            <a href="https://laravel.com/docs" target="_blank">Laravel Documentation</a>
-            <a href="https://github.com/laravel/laravel" target="_blank">Laravel GitHub</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Rekkusu</a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
         </div>
-    </div>
+    </nav>
+
+    <header>
+        <div style="height: 120px;"></div>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-card">
+            <div class="profile-image">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Background circle -->
+                  <circle cx="100" cy="100" r="100" fill="#3b82f6" />
+                  
+                  <!-- Abstract user avatar -->
+                  <g transform="translate(40, 40)">
+                    <!-- Head -->
+                    <circle cx="60" cy="45" r="35" fill="#f8fafc" />
+                    
+                    <!-- Body -->
+                    <path d="M10 120 Q60 80 110 120" stroke="#f8fafc" stroke-width="40" fill="none" />
+                    
+                    <!-- Details - glasses to make it more personalized -->
+                    <circle cx="45" cy="42" r="8" fill="#3b82f6" stroke="#1e40af" stroke-width="2" />
+                    <circle cx="75" cy="42" r="8" fill="#3b82f6" stroke="#1e40af" stroke-width="2" />
+                    <line x1="53" y1="42" x2="67" y2="42" stroke="#1e40af" stroke-width="2" />
+                    
+                    <!-- Smile -->
+                    <path d="M45 60 Q60 70 75 60" stroke="#1e40af" stroke-width="3" fill="none" />
+                    
+                    <!-- Hair outline -->
+                    <path d="M25 30 Q60 5 95 30" stroke="#1e40af" stroke-width="8" fill="none" />
+                  </g>
+                </svg>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">Rekkusu</h1>
+                <p class="profile-title">Laravel & Web Developer</p>
+                <p class="profile-bio">Experienced web developer specializing in Laravel applications and modern web technologies. Passionate about creating elegant, efficient, and user-friendly web solutions that solve real-world problems.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/rekkesu" target="_blank" class="social-icon" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <a href="#contact" class="cta-button">Get In Touch</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <h2 class="section-title">About Me</h2>
+            <p>Hello! I'm a passionate web developer with a focus on Laravel and modern PHP development. With several years of experience in web development, I specialize in building robust, scalable web applications that deliver exceptional user experiences.</p>
+            <p>My expertise includes full-stack development with Laravel, front-end technologies like Vue.js and React, and database design. I'm committed to writing clean, maintainable code and staying up-to-date with the latest web development trends and best practices.</p>
+            <p>When I'm not coding, I enjoy contributing to open-source projects and sharing my knowledge with the developer community.</p>
+        </section>
+
+        <section id="skills" class="content-section">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-tag">Laravel</div>
+                <div class="skill-tag">PHP</div>
+                <div class="skill-tag">MySQL</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">Vue.js</div>
+                <div class="skill-tag">React</div>
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3/SCSS</div>
+                <div class="skill-tag">Tailwind CSS</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">RESTful APIs</div>
+                <div class="skill-tag">Database Design</div>
+                <div class="skill-tag">Responsive Design</div>
+                <div class="skill-tag">UI/UX Principles</div>
+                <div class="skill-tag">Server Administration</div>
+            </div>
+        </section>
+
+        <section id="projects" class="content-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/180" alt="E-commerce Platform">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Laravel E-commerce Platform</h3>
+                        <p class="project-desc">A fully-featured e-commerce solution built with Laravel, featuring product management, cart functionality, payment integration, and an admin dashboard.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/180" alt="CRM System">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Customer Management System</h3>
+                        <p class="project-desc">A comprehensive CRM system developed with Laravel and Vue.js, allowing businesses to manage customer relationships, track interactions, and analyze sales data.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="/api/placeholder/400/180" alt="Content Management System">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Custom CMS Solution</h3>
+                        <p class="project-desc">A flexible content management system built with Laravel, featuring dynamic content types, user management, media library, and customizable themes.</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Email</h3>
+                        <a href="mailto:contact@example.com">contact@example.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Facebook</h3>
+                        <a href="https://facebook.com/rekkesu" target="_blank">facebook.com/rekkesu</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Location</h3>
+                        <p>Available for Remote Work</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Rekkusu | Laravel & Web Developer</p>
+        <p>Portfolio crafted with modern web technologies</p>
+    </footer>
 </body>
-</html> 
+</html>
