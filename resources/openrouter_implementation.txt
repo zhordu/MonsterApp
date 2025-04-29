@@ -1,0 +1,95 @@
+// OpenRouter AI Implementation for Monster Sighting App
+// This implementation is used in the interactive map for generating monster names and descriptions
+
+// First API call to generate monster name
+fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {{ env("OPENROUTER_API_KEY") }}',
+        'HTTP-Referer': window.location.origin,
+        'X-Title': 'Monster Sighting App'
+    },
+    body: JSON.stringify({
+        model: 'shisa-ai/shisa-v2-llama3.3-70b:free',
+        messages: [
+            {
+                role: 'user',
+                content: [
+                    {
+                        type: 'text',
+                        text: `Based on this image and the category "${categorySelect.value}", create a unique and fitting name for this monster. The name should be like memes, brainrot name and modern funny name for its appearance and category. Return only the name, nothing else.`
+                    },
+                    {
+                        type: 'image_url',
+                        image_url: {
+                            url: `data:image/jpeg;base64,${base64Image}`
+                        }
+                    }
+                ]
+            }
+        ]
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.choices && data.choices[0]) {
+        const monsterName = data.choices[0].message.content.trim();
+        monsterNameInput.value = monsterName;
+        monsterNameInput.classList.remove('animate-pulse');
+
+        // Second API call to generate description
+        return fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer {{ env("OPENROUTER_API_KEY") }}',
+                'HTTP-Referer': window.location.origin,
+                'X-Title': 'Monster Sighting App'
+            },
+            body: JSON.stringify({
+                model: 'shisa-ai/shisa-v2-llama3.3-70b:free',
+                messages: [
+                    {
+                        role: 'user',
+                        content: [
+                            {
+                                type: 'text',
+                                text: `Describe this monster sighting in detail. The monster is named ${monsterName}, is of category "${categorySelect.value}", and was sighted at ${document.getElementById('location_name').value}. Include physical characteristics, behavior, and any notable features. Make it sound like a real eyewitness account. Keep it concise but descriptive.make sure only the description will show and make the description start in like you describe the monster and where are you when you saw it and what are you doing in that location`
+                            },
+                            {
+                                type: 'image_url',
+                                image_url: {
+                                    url: `data:image/jpeg;base64,${base64Image}`
+                                }
+                            }
+                        ]
+                    }
+                ]
+            })
+        });
+    }
+})
+.then(response => response.json())
+.then(data => {
+    if (data.choices && data.choices[0]) {
+        const description = data.choices[0].message.content.trim();
+        descriptionTextarea.value = description;
+        descriptionTextarea.classList.remove('animate-pulse');
+    }
+})
+.catch(error => {
+    console.error('Error generating content:', error);
+    monsterNameInput.value = 'Failed to generate name';
+    descriptionTextarea.value = 'Failed to generate description from image';
+    monsterNameInput.classList.remove('animate-pulse');
+    descriptionTextarea.classList.remove('animate-pulse');
+});
+
+// Implementation Notes:
+// 1. Requires OpenRouter API key stored in environment variables as OPENROUTER_API_KEY
+// 2. Uses the shisa-ai/shisa-v2-llama3.3-70b:free model
+// 3. Handles both image-based name generation and description generation
+// 4. Includes error handling and loading states
+// 5. Images must be base64 encoded before sending to the API
+// 6. Updates form fields with generated content 
